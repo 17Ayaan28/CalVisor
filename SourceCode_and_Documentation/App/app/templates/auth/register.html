@@ -1,0 +1,26 @@
+<html class='bg_auth'>
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block scripts %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/auth.css')}}">
+{% endblock %}
+
+{% block title %} App {% endblock %}
+
+{% block page_content %}
+<h1 style="padding-left:150px;color:#344CD1;"><b> <br><br><br>Create Account </b></h1>
+<h5 style="padding-left:150px;color:grey"> Already have an account? <a href="{{ url_for('auth.login') }}">Log in here</a>. </h5><br>
+
+<div class='col-md-4' style="padding-left:150px">
+    {{ wtf.quick_form(form)}}
+</div>
+{% endblock %}
+
+#roundborder {
+    border: 2px solid red;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+</html>

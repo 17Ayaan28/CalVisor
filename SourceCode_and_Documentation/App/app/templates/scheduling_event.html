@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %} App {% endblock %}
+
+{% block head %}
+    {{super()}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/modal.css')}}">
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='packages/fullCalendar/core/main.css')}}" />
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='packages/fullCalendar/daygrid/main.css')}}" />
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='packages/fullCalendar/timegrid/main.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/scheduling.css')}}">
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='scripts/requests.js')}}" ></script>
+{% endblock %}
+
+{% block page_content %}
+    <div class="my_invites" id="my_invites">
+        {% if my_events_contents|length %}
+            <h1 class='invite_list' style="text-align: center; "> <b>My Invites</b> </h1>
+            <br/>
+            {% for i in range(my_events_contents|length) %}
+                <div id = "{{i}}_scheduling_event" class="scheduling_event">
+                    <div id="confirmation_accept" style="display:block;"></div>
+                    <div id="confirmation_id" style="display:block;"></div>
+
+                    <p class="scheduling_event_title"> You are invited to {{my_events_contents[i][3]}} by {{my_events_contents[i][0]}}! </p>
+                    <p style="margin-left: 20px"> The details of the events are: </p>
+                    <p style="margin-left: 80px"> Date and Time: {{my_events_contents[i][5]}} from {{my_events_contents[i][6]}} - {{my_events_contents[i][7]}} </p>
+                    <p style="margin-left: 80px"> Location: {{my_events_contents[i][4]}} </p>
+                    <button class="btn btn-success" onclick="poc_accept({{i}},{{my_events_contents[i][2]}},{{previous_events[i]}}, {{next_events[i]}},'/finalise_invite_accept', 'POST')" type='button' data-toggle="modal" data-target="#modal1"> Accept Event </button>
+                    <button class="btn btn-danger" onclick="poc_decline({{i}},{{my_events_contents[i][2]}},'/finalise_decline_accept', 'POST')" type='button'> Decline Event </button>
+                </div>
+            {% endfor %}
+            <script>
+                poc_accept = async (index, scheduling_id, previous_event, next_event, endpoint, type) => {
+                    document.getElementById('modal_body').innerText = "";
+                    console.log(previous_event)
+                    if (previous_event[0] !== -1) {
+                        const div = document.createElement('div');
+                        const p1 = document.createElement('p');
+                        p1.appendChild(document.createTextNode("The Event Before"));
+                        p1.setAttribute('class', 'previous_event_title');
+                        p1.setAttribute('id', `${index}_previous_event`);
+                        div.appendChild(p1);
+                        const p2 = document.createElement('p');
+                        p2.appendChild(document.createTextNode("Name: " + previous_event[1]));
+                        p2.setAttribute('class', 'previous_event_name')
+                        p2.setAttribute('id', `${index}_previous_event_name`);
+                        div.appendChild(p2);
+                        const p3 = document.createElement('p');
+                        p3.appendChild(document.createTextNode("Date and Time: " + previous_event[3] + " from " + previous_event[4] + "-" + previous_event[5]));
+                        p3.setAttribute('class', 'previous_event_date_time')
+                        p3.setAttribute('id', `${index}_previous_event_date_time`);
+                        div.appendChild(p3);
+                        const p4 = document.createElement('p');
+                        p4.appendChild(document.createTextNode("Location: " + previous_event[2]));
+                        p4.setAttribute('class', 'previous_event_location')
+                        p4.setAttribute('id', `${index}_previous_event_location`);
+                        div.appendChild(p4);
+                        div.setAttribute('class', 'previous_event')
+                        document.getElementById('modal_body').appendChild(div);
+
+                    }
+                    else{
+                        const div = document.createElement('div');
+                        div.setAttribute('class', 'previous_event')
+                        const p1 = document.createElement('p');
+                        p1.appendChild(document.createTextNode("You do not have any events scheduled before this event!"));
+                        p1.setAttribute('class', 'previous_event_empty');
+                        p1.setAttribute('id', `${index}_previous_empty`);
+                        div.appendChild(p1);
+                        document.getElementById('modal_body').appendChild(div);
+                    }
+                    if (next_event[0] !== -1) {
+                        const div = document.createElement('div');
+                        const p5 = document.createElement('p');
+                        p5.appendChild(document.createTextNode("The Event After"));
+                        p5.setAttribute('class', 'next_event_title');
+                        p5.setAttribute('id', `${index}_next_event`);
+                        div.appendChild(p5);
+                        const p6 = document.createElement('p');
+                        p6.appendChild(document.createTextNode("Name: " + next_event[1]));
+                        p6.setAttribute('class', 'next_event_name')
+                        p6.setAttribute('id', `${index}_next_event_name`);
+                        div.appendChild(p6);
+                        const p7 = document.createElement('p');
+                        p7.appendChild(document.createTextNode("Date and Time: " + next_event[3] + " from " + next_event[4] + "-" + next_event[5]));
+                        p7.setAttribute('class', 'next_event_date_time')
+                        p7.setAttribute('id', `${index}_next_event_date_time`);
+                        div.appendChild(p7);
+                        const p8 = document.createElement('p');
+                        p8.appendChild(document.createTextNode("Location: " + next_event[2]));
+                        p8.setAttribute('class', 'next_event_location')
+                        p8.setAttribute('id', `${index}_next_event_location`);
+                        div.appendChild(p8);
+                        div.setAttribute('class', 'next_event')
+                        document.getElementById('modal_body').appendChild(div);
+                    }
+                    else{
+                        const div = document.createElement('div');
+                        div.setAttribute('class', 'next_event')
+                        const p5 = document.createElement('p');
+                        p5.appendChild(document.createTextNode("You do not have any events scheduled after this event!"));
+                        p5.setAttribute('class', 'next_event_empty');
+                        p5.setAttribute('id', `${index}_next_empty`);
+                        div.appendChild(p5);
+                        document.getElementById('modal_body').appendChild(div);
+                    }
+                    console.log(document.getElementById(`confirmation_accept`))
+                    document.getElementById(`confirmation_accept`).value = scheduling_id;
+                    document.getElementById('confirmation_id').value=index
+                    // console.log(document.getElementById('confirmation_accept'))
+                }
+                poc_decline = async (index, scheduling_id, endpoint, type) => {
+                    const data = {index, scheduling_id};
+                    const response = await makeRequest(data, endpoint, type);
+                    if (response.error_message){
+                        document.getElementById(`${index}_scheduling_event`).appendChild(makeElement("", `${index}_error_message`, response.error_message))
+                    }
+                    else {
+                        let div_id = document.getElementById(`${index}_scheduling_event`)
+                        document.getElementById('my_invites').removeChild(div_id)
+                    }
+                }
+            </script>
+        {% else %}
+            <h1 class='empty_invite_list' style="text-align: center"> You do not have any outstanding invites! </h1>
+        {% endif %}
+    </div>
+
+
+    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal1Title">Are you sure?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal_body">
+<!--              <div id="confirmation_accept" style="display:block;"></div>-->
+          </div>
+          <div class="modal-footer">
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">I don't know where to go</button>-->
+            <button class="btn btn-default" onclick="poc_accept2('/finalise_invite_accept', 'POST')" type='button' data-dismiss="modal"> Yes </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+
+          </div>
+        </div>
+      </div>
+        <script>
+            poc_accept2 = async (endpoint, type) => {
+                let scheduling_id = document.getElementById('confirmation_accept').value;
+                let index = document.getElementById('confirmation_id').value;
+                console.log(index)
+                console.log(scheduling_id)
+                const data = {index, scheduling_id};
+                const response = await makeRequest(data, endpoint, type);
+                if (response.error_message){
+                    document.getElementById(`${index}_scheduling_event`).appendChild(makeElement("", `${index}_error_message`, response.error_message));
+                }
+                else {
+                    let div_id = document.getElementById(`${index}_scheduling_event`);
+                    document.getElementById('my_invites').removeChild(div_id);
+                }
+            }
+        </script>
+    </div>
+{% endblock %}

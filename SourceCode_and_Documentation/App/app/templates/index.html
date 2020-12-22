@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} App {% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/index.css')}}">
+{% endblock %}
+
+{% block page_content %}
+    
+    <div style="text-align:center;padding-top:350px">
+        <h4> A smart calendar for productive days </h4><br><br>
+        <a href="{{ url_for('auth.login') }}" style="background:linear-gradient(to bottom right, #344CD1, #B3BEFF);color:white;font-weight:bold;padding:15px;border-radius:10px;width:100%;">Log in</a>
+        <a href="{{ url_for('auth.register') }}" style="background:linear-gradient(to bottom right, #344CD1, #B3BEFF);color:white;font-weight:bold;padding:15px;border-radius:10px;">Register</a>
+    </div>
+    
+{% endblock %}

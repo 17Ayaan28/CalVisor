@@ -1,0 +1,63 @@
+
+body {
+    font-family: Optima;
+    background-image: url("../images/recommendationbg.jpg");
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+.question-2{
+    display: None;
+}
+
+.question-3{
+    display: none;
+}
+
+.question-4{
+    display: none;
+}
+
+.question-5 {
+    display: none;
+}
+
+.submit{
+    display: none;
+}
+.rec-list.header{
+    display: none;
+}
+
+.recommendation-item{
+    display:none;
+}
+
+.rec-lis.header.found{
+    display: none;
+}
+
+.recommendation-status.clashing{
+    color: red;
+}
+.recommendation-item{
+    background-color:#fce8ef;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 20px;
+    border: 0.5px solid black;
+    border-radius: 25px;
+    padding: 30px;
+    width: 700px;
+}
+
+#rec_button {
+    background:linear-gradient(to bottom right, #344CD1, #B3BEFF);
+    color:white;
+    font-weight:bold;
+    padding:10px;
+    width:85px;
+    border-radius:10px;
+}

@@ -1,0 +1,9 @@
+body {
+    font-family: Optima;
+    background-image: url("../images/bgpic.jpg");
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 100%;
+}

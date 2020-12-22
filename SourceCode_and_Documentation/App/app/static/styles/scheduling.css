@@ -1,0 +1,62 @@
+body {
+    font-family: Optima;
+    background-repeat: no-repeat;
+    background-image: url("../images/invite.gif");
+    background-size: 500px;
+    background-color: white;
+    background-position:bottom;
+    background-attachment: fixed;
+}
+
+div.scheduling_event{
+    margin-left: 100px;
+    margin-right: 100px;
+    background-color:#fce8ef;
+    border-radius: 25px;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.previous_event{
+    margin: 20px;
+    border: solid;
+    border-radius: 25px;
+    padding: 10px;
+}
+div.next_event{
+    margin: 20px;
+    border: solid;
+    border-radius: 25px;
+    padding: 10px;
+}
+p.previous_event_title {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 900;
+    text-decoration: underline;
+}
+p.previous_event_empty {
+    font-size: 17px;
+    text-align: center;
+    font-weight: 900;
+    text-decoration: underline;
+}
+p.next_event_title {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 900;
+    text-decoration: underline;
+
+}
+p.next_event_empty {
+    font-size: 17px;
+    text-align: center;
+    font-weight: 900;
+    text-decoration: underline;
+}
+p.scheduling_event_title{
+    font-size: 17px;
+    text-align: center;
+    font-weight: 900;
+    text-decoration: underline;
+}

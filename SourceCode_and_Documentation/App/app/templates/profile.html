@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block scripts %}
+    {{super()}}
+    <script src="{{ url_for('static', filename='scripts/update_details.js')}}"></script>
+    <script src="{{ url_for('static', filename='scripts/username_search.js')}}" ></script>
+{% endblock %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/profile.css')}}">
+{% endblock %}
+{% block title %} App {% endblock %}
+{% block page_content %}
+
+<br><br><br><br><br>
+
+<div class='col-md-4' style="padding-top:10px;padding-bottom:40px;padding-left:40px;padding-right:40px;background-color:white;width:50%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:25px;left:25%;right:25%">
+
+    <div class='page-header' style="color:#344CD1;text-align:center">
+        <h2> My Account Details </h2>
+    </div>
+
+    <p> Email: <span class='usr-info'>{{ current_user.email }}</span> </p>
+    <p> Username:  <span class='usr-info'>{{ current_user.username }} </span></p>
+    <p> Private:  <span class='usr-info'>{{ current_user.profile_settings }} </span></p><br>
+    <button type='button'class='btn btn-default edit-details' style="background:linear-gradient(to bottom right, #344CD1, #B3BEFF);color:white;font-weight:bold;">Edit Details</button>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+<html>
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %} App {% endblock %}
+{% block scripts %}
+    {{super()}}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/modal.css')}}">
+    <script src="{{ url_for('static', filename='scripts/login.js')}}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/auth.css')}}">
+
+{% endblock %}
+
+
+{% block page_content %}
+<div>
+    <h1 style="padding-left:100px;color:#344CD1"><b> <br><br><br>Welcome back! </b></h1>
+    <h5 style="padding-left:100px;color:grey"> Log in to continue. </h5><br>
+
+<div class='col-md-4' style="padding-left:100px">
+    {{ wtf.quick_form(form) }}
+    <p>
+        Forgot your password?
+        <a href="{{ url_for('auth.change_password') }}">
+            Change Password
+        </a>
+    </p>
+    <p>
+        Don't have an account?
+        <a href="{{ url_for('auth.register') }}">
+            Register Here
+        </a>
+    </p>
+</div>
+{% endblock %}
+</html>

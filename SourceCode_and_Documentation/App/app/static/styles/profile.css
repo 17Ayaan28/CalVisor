@@ -1,0 +1,13 @@
+.usr-info {
+    font-weight: bold;
+}
+
+body {
+    font-family: Optima;
+    background-image: url("../images/updateprofilebg.jpg");
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 100%;
+}

@@ -1,0 +1,81 @@
+<html>
+<head>
+
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/recommendation.css')}}">
+
+{% endblock %}
+{% block scripts %}
+    {{super()}}
+    <script src="{{ url_for('static', filename='scripts/cancel_button.js')}}"></script>
+    <script>
+        var has_events_before = {{has_events_before}}
+    </script>
+    <script src="{{ url_for('static', filename='scripts/recommendation.js')}}"></script>
+    <script src="{{ url_for('static', filename='scripts/username_search.js')}}"></script>
+
+
+
+{% endblock %}
+{% block title %} App {% endblock %}
+
+</head>
+<body>
+
+{% block page_content %}
+<br><br><br>
+    <h1 style="padding-left:15px;position:fixed;color:black">Recommendations</h1>
+<br><br><br><br>
+<div class="row" style="padding-left:5px">
+    <div class='col-md-4 rec-parameters' style="position:fixed;padding:50px;background-color:white;width:25%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:25px;">
+        <form id='recommendation-form'>
+            <div class='question-1'>
+                <p> <b>Do you have a place in mind?</b> <br><input type='text' class='question-1-input-text'><p>
+                <div class='question-1-buttons'>
+                    <button type="button" name="button" class='question-1-input-button yes' id="rec_button">Yes</button>
+                    <button type="button" name="button" class='question-1-input-button No' id="rec_button">No</button>
+                </div>
+            </div>
+            <div class='question-5'>
+                <p> <b>Where did you want to go?</b> <input type='text' class='question-5-input-text destination'></p>
+                <div class='question-5-buttons'>
+                    <button type="button" name="button" class='question-5-input-button continue' id="rec_button">Continue</button>
+                </div>
+            </div>
+            <div class='question-2'>
+                <p> <br><b>What did you want to do?</b> </p>
+                <p> I want to <input type='text' class='question-2-input-text'></p>
+                <div class='question-2-buttons'>
+                    <button type="button" name="button" class='question-2-input-button Eat' id="rec_button">Eat</button>
+                    <button type="button" name="button" class='question-2-input-button Study' id="rec_button">Study</button>
+                    <button type="button" name="button" class='question-2-input-button Hangout' id="rec_button">Hangout</button>
+                    <button type="button" name="button" class='question-2-input-button Exercise' id="rec_button">Exercise</button>
+                </div>
+            </div>
+            <div class='question-3'>
+                <p> For <input type='text' class='question-3-input-text hours' value='1'> Hours & <br><input type='text' class='question-3-input-text mins' value='0'> Mins </p>
+                <div class='question-3-buttons'>
+                    <button type="button" name="button" class='question-3-input-button continue' id="rec_button">Continue</button>
+                </div>
+            </div>
+            <div class='question-4'>
+                <p> and I'm currently at <input type='text' class='question-4-input-text current-location'></p>
+            </div>
+            <div class='submit'>
+                <button type="button" name="button" class='submit-button go' id="rec_button">Lets Go!</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8 rec-list">
+        <h2 class='rec-list header text-center searching' style="padding-left:700px"><img src="../static/images/pen.gif" height="400px"></h2>
+        <h4 class='rec-list header text-center found' style="padding-left:500px;text-align:center">Here's What We Found</h4>
+        <div class='rec-items' style="padding-left:500px"></div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

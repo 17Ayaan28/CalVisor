@@ -1,0 +1,8 @@
+body {
+    font-family: Optima;
+    background-repeat: no-repeat;
+    background-image: url("../images/add_event.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 100%;
+}
